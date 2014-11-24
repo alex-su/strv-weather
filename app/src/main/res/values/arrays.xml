@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_length_values">
+        <item>meters</item>
+        <item>feet</item>
+    </string-array>
+
+    <string-array name="pref_temperature_values">
+        <item>celsius</item>
+        <item>fahrenheit</item>
+    </string-array>
+
+    <string-array name="pref_length_entries">
+        <item>@string/pref_length_entry_meters</item>
+        <item>@string/pref_length_entry_feet</item>
+    </string-array>
+
+    <string-array name="pref_temperature_entries">
+        <item>@string/pref_temperature_entry_celsius</item>
+        <item>@string/pref_temperature_entry_fahrenheit</item>
+    </string-array>
+
+</resources>
