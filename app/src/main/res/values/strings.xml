@@ -18,4 +18,15 @@
     <string name="pref_temperature_entry_celsius">Celsius</string>
     <string name="pref_temperature_entry_fahrenheit">Fahrenheit</string>
 
+    <string name="error_location">Cannot define current location</string>
+
+    <string name="format_location">%1$s, %2$s</string>
+    <string name="format_temperature_celsius">%1$d&#xb0;C | %2$s</string>
+    <string name="format_temperature_fahrenheit">%1$d&#xb0;F | %2$s</string>
+    <string name="format_humidity">%d%%</string>
+    <string name="format_precipitation">%.1f mm</string>
+    <string name="format_pressure">%d hPa</string>
+    <string name="format_speed_kmph">%d km/h</string>
+    <string name="format_speed_miles">%d mi/h</string>
+
 </resources>

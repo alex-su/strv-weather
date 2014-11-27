@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.fragment.AbsNavigationFragment;
+import com.alexsu.weather.android.fragment.AbsLocationFragment;
 import com.alexsu.weather.android.fragment.ForecastFragment;
 import com.alexsu.weather.android.fragment.NavigationDrawerFragment;
 import com.alexsu.weather.android.fragment.TodayFragment;
@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        AbsNavigationFragment fragment = getFragmentForPosition(position);
+        AbsLocationFragment fragment = getFragmentForPosition(position);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity
         getSupportActionBar().setTitle(fragment.getTitleRes());
     }
 
-    private AbsNavigationFragment getFragmentForPosition(int position) {
+    private AbsLocationFragment getFragmentForPosition(int position) {
         switch (position) {
             case 1:
                 return ForecastFragment.newInstance();

@@ -3,10 +3,13 @@ package com.alexsu.weather.android;
 import android.app.Application;
 import android.content.Context;
 
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.concurrent.TimeUnit;
+
 public class StrvWeatherApplication extends Application {
 
     private static StrvWeatherApplication mInstance;
-
 
     public StrvWeatherApplication() {
         mInstance = this;
