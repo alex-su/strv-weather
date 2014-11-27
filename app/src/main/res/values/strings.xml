@@ -23,6 +23,8 @@
     <string name="format_location">%1$s, %2$s</string>
     <string name="format_temperature_celsius">%1$d&#xb0;C | %2$s</string>
     <string name="format_temperature_fahrenheit">%1$d&#xb0;F | %2$s</string>
+    <string name="format_temperature_celsius_short">%d&#xb0;C</string>
+    <string name="format_temperature_fahrenheit_short">%d&#xb0;F</string>
     <string name="format_humidity">%d%%</string>
     <string name="format_precipitation">%.1f mm</string>
     <string name="format_pressure">%d hPa</string>
