@@ -1,5 +1,6 @@
 package com.alexsu.weather.android.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -68,19 +69,6 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            SettingsActivity.startActivity(this);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

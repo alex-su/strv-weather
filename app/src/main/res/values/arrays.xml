@@ -2,18 +2,18 @@
 <resources>
 
     <string-array name="pref_length_values">
-        <item>meters</item>
-        <item>feet</item>
+        <item>@string/pref_length_value_meters</item>
+        <item>@string/pref_length_value_miles</item>
     </string-array>
 
     <string-array name="pref_temperature_values">
-        <item>celsius</item>
-        <item>fahrenheit</item>
+        <item>@string/pref_temperature_value_celsius</item>
+        <item>@string/pref_temperature_value_fahrenheit</item>
     </string-array>
 
     <string-array name="pref_length_entries">
         <item>@string/pref_length_entry_meters</item>
-        <item>@string/pref_length_entry_feet</item>
+        <item>@string/pref_length_entry_miles</item>
     </string-array>
 
     <string-array name="pref_temperature_entries">

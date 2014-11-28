@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
 import java.text.SimpleDateFormat;
@@ -26,11 +27,14 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
     private Resources mResources;
     private AQuery mAQuery;
 
+    private boolean mIsUsingCelsius;
+
     public ForecastAdapter(Context context, ArrayList<WeatherCondition> forecastList) {
         super(context, R.layout.list_item_forecast, forecastList);
         mLayoutInflater = LayoutInflater.from(context);
         mResources = context.getResources();
         mAQuery = new AQuery(context);
+        mIsUsingCelsius = Settings.isUsingCelsius(context);
     }
 
     @Override
@@ -45,6 +49,11 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
         }
         viewHolder.populate(getItem(position));
         return convertView;
+    }
+
+    public void updateSettings(boolean isUsingCelsius) {
+        mIsUsingCelsius = isUsingCelsius;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder {
@@ -63,9 +72,16 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
         }
 
         public void populate(WeatherCondition weatherCondition) {
-            String temperatureString = mResources.getString(
-                    R.string.format_temperature_celsius_short,
-                    weatherCondition.getTemperatureCelsius());
+            String temperatureString;
+            if (mIsUsingCelsius) {
+                temperatureString = mResources.getString(
+                        R.string.format_temperature_celsius_short,
+                        weatherCondition.getTemperatureCelsius());
+            }  else {
+                temperatureString = mResources.getString(
+                        R.string.format_temperature_fahrenheit_short,
+                        weatherCondition.getTemperatureFahrenheit());
+            }
             mTemperatureLabel.setText(temperatureString);
             mDayLabel.setText(formatDate(weatherCondition.getDate()));
             mConditionsLabel.setText(weatherCondition.getDescription());

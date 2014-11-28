@@ -1,26 +1,20 @@
-package com.alexsu.weather.android.activity;
+package com.alexsu.weather.android.fragment;
 
-import android.content.Context;
-import android.content.Intent;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.support.v4.app.Fragment;
+import android.preference.PreferenceFragment;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.util.Constants;
 import com.alexsu.weather.android.util.OnSettingsChangeListener;
 import com.alexsu.weather.android.util.Settings;
 
-/**
- * SettingsActivity for API < 11
- */
-@SuppressWarnings("deprecation")
-public class SettingsActivity extends PreferenceActivity {
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public class SettingsFragment extends PreferenceFragment {
 
-    public static void startActivityForResult(Context context, Fragment fromFragment) {
-        Intent intent = new Intent(context, SettingsActivity.class);
-        fromFragment.startActivityForResult(intent, Constants.REQUEST_CODE_SETTINGS);
+    public static SettingsFragment newInstance() {
+        return new SettingsFragment();
     }
 
     private OnSettingsChangeListener mOnSettingsChangeListener;
@@ -38,7 +32,7 @@ public class SettingsActivity extends PreferenceActivity {
         Preference temperaturePref = findPreference(getString(R.string.pref_key_temperature));
         showCurrentValues(lengthPref, temperaturePref);
         mOnSettingsChangeListener = new OnSettingsChangeListener(
-                this, lengthPref, temperaturePref);
+                getActivity(), lengthPref, temperaturePref);
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(mOnSettingsChangeListener);
     }
@@ -51,10 +45,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private void showCurrentValues(Preference lengthPref, Preference temperaturePref) {
-        lengthPref.setSummary(Settings.isUsingMeters(this) ?
+        lengthPref.setSummary(Settings.isUsingMeters(getActivity()) ?
                 R.string.pref_length_entry_meters :
                 R.string.pref_length_entry_miles);
-        temperaturePref.setSummary(Settings.isUsingCelsius(this) ?
+        temperaturePref.setSummary(Settings.isUsingCelsius(getActivity()) ?
                 R.string.pref_temperature_entry_celsius :
                 R.string.pref_temperature_entry_fahrenheit);
     }

@@ -18,6 +18,7 @@ import com.alexsu.weather.android.client.command.GetTodayWeatherCommand;
 import com.alexsu.weather.android.client.data.LocalWeather;
 import com.alexsu.weather.android.client.data.WeatherCondition;
 import com.alexsu.weather.android.client.data.WeatherLocation;
+import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
 import butterknife.ButterKnife;
@@ -48,6 +49,8 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     @InjectView(R.id.today_progress_layout)
     FrameLayout mProgressLayout;
 
+    private LocalWeather mLocalWeather;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_today, null);
@@ -62,6 +65,10 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
 
     @Override
     protected void onLocationReceived(Location location) {
+        if (location == null) {
+            onLocationError();
+            return;
+        }
         showProgress();
         Bundle params = new Bundle();
         params.putParcelable(EXTRA_LOCATION, location);
@@ -71,6 +78,11 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     @Override
     protected void onLocationError() {
         hideProgress();
+    }
+
+    @Override
+    protected void onSettingsChanged() {
+        showWeatherData();
     }
 
     @Override
@@ -87,17 +99,24 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     @Override
     public void onLoadFinished(Loader<LocalWeather> loader, LocalWeather weather) {
         hideProgress();
-        if (weather.getWeatherLocation() != null) {
-            showWeatherLocation(weather.getWeatherLocation());
-        }
-        if (weather.getWeatherCondition() != null) {
-            showWeatherCondition(weather.getWeatherCondition());
-        }
+        mLocalWeather = weather;
+        showWeatherData();
     }
 
     @Override
     public void onLoaderReset(Loader<LocalWeather> loader) {
         hideProgress();
+    }
+
+    private void showWeatherData() {
+        if (mLocalWeather != null) {
+            if (mLocalWeather.getWeatherLocation() != null) {
+                showWeatherLocation(mLocalWeather.getWeatherLocation());
+            }
+            if (mLocalWeather.getWeatherCondition() != null) {
+                showWeatherCondition(mLocalWeather.getWeatherCondition());
+            }
+        }
     }
 
     private void showWeatherLocation(WeatherLocation weatherLocation) {
@@ -107,21 +126,41 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     }
 
     private void showWeatherCondition(WeatherCondition weatherCondition) {
-        mTemperatureLabel.setText(getString(R.string.format_temperature_celsius,
-                weatherCondition.getTemperatureCelsius(),
-                weatherCondition.getDescription()));
         mHumidityLabel.setText(getString(R.string.format_humidity,
                 weatherCondition.getHumidity()));
         mPrecipitationLabel.setText(getString(R.string.format_precipitation,
                 weatherCondition.getPrecipitation()));
         mPressureLabel.setText(getString(R.string.format_pressure,
                 weatherCondition.getPressure()));
-        mWindSpeedLabel.setText(getString(R.string.format_speed_kmph,
-                weatherCondition.getWindSpeedKmph()));
         mWindDirectionLabel.setText(weatherCondition.getWindDirection());
+
+        showTemperature(weatherCondition);
+        showWindSpeed(weatherCondition);
 
         if (!TextUtils.isEmpty(weatherCondition.getIconUrl())) {
             loadWeatherIcon(weatherCondition.getIconUrl());
+        }
+    }
+
+    private void showTemperature(WeatherCondition weatherCondition) {
+        if (Settings.isUsingCelsius(getActivity())) {
+            mTemperatureLabel.setText(getString(R.string.format_temperature_celsius,
+                    weatherCondition.getTemperatureCelsius(),
+                    weatherCondition.getDescription()));
+        } else {
+            mTemperatureLabel.setText(getString(R.string.format_temperature_fahrenheit,
+                    weatherCondition.getTemperatureFahrenheit(),
+                    weatherCondition.getDescription()));
+        }
+    }
+
+    private void showWindSpeed(WeatherCondition weatherCondition) {
+        if (Settings.isUsingMeters(getActivity())) {
+            mWindSpeedLabel.setText(getString(R.string.format_speed_kmph,
+                    weatherCondition.getWindSpeedKmph()));
+        } else {
+            mWindSpeedLabel.setText(getString(R.string.format_speed_miles,
+                    weatherCondition.getWindSpeedMiles()));
         }
     }
 

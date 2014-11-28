@@ -2,20 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:defaultValue="meters"
+        android:defaultValue="@string/pref_length_value_meters"
         android:dialogTitle="@string/pref_length_dialog_title"
         android:entries="@array/pref_length_entries"
         android:entryValues="@array/pref_length_values"
-        android:key="pref_length"
-        android:title="@string/pref_length_title"
-        android:summary="Meters"/>
+        android:key="@string/pref_key_length"
+        android:title="@string/pref_length_title"/>
 
     <ListPreference
-        android:defaultValue="celsius"
+        android:defaultValue="@string/pref_temperature_value_celsius"
         android:dialogTitle="@string/pref_temperature_dialog_title"
         android:entries="@array/pref_temperature_entries"
         android:entryValues="@array/pref_temperature_values"
-        android:key="pref_temperature"
+        android:key="@string/pref_key_temperature"
         android:title="@string/pref_temperature_title" />
 
 </PreferenceScreen>

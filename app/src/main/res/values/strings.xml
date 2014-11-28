@@ -12,7 +12,7 @@
     <string name="pref_length_title">Unit of length</string>
     <string name="pref_length_dialog_title">Choose preferred unit of length</string>
     <string name="pref_length_entry_meters">Meters</string>
-    <string name="pref_length_entry_feet">Feet</string>
+    <string name="pref_length_entry_miles">Miles</string>
     <string name="pref_temperature_title">Unit of temperature</string>
     <string name="pref_temperature_dialog_title">Choose preferred unit of temperature</string>
     <string name="pref_temperature_entry_celsius">Celsius</string>
@@ -30,5 +30,13 @@
     <string name="format_pressure">%d hPa</string>
     <string name="format_speed_kmph">%d km/h</string>
     <string name="format_speed_miles">%d mi/h</string>
+
+    <!-- Technical fields -->
+    <string name="pref_key_length">pref_length</string>
+    <string name="pref_key_temperature">pref_temperature</string>
+    <string name="pref_length_value_meters">meters</string>
+    <string name="pref_length_value_miles">miles</string>
+    <string name="pref_temperature_value_celsius">celsius</string>
+    <string name="pref_temperature_value_fahrenheit">fahrenheit</string>
 
 </resources>
