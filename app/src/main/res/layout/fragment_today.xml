@@ -1,164 +1,178 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/today_weather_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:padding="20dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/overlay_weather_status_today"
-        tools:ignore="ContentDescription" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/today_weather_icon_overlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/today_weather_icon"
-        android:layout_alignRight="@id/today_weather_icon"
-        android:layout_alignTop="@id/today_weather_icon"
-        android:layout_alignBottom="@id/today_weather_icon"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/overlay_weather_status_today"
-        tools:ignore="ContentDescription" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/today_location_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/today_weather_icon"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        tools:text="Prague, Czech Republic"/>
+            <ImageView
+                android:id="@+id/today_weather_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:padding="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/overlay_weather_status_today"
+                tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/today_temperature_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/today_location_label"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:textSize="36sp"
-        android:singleLine="true"
-        tools:text="25C | Sunny"/>
-
-    <View
-        android:id="@+id/today_screen_divider"
-        android:layout_width="120dp"
-        android:layout_height="1dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/today_temperature_label"
-        android:layout_marginTop="32dp"
-        android:background="@color/bg_light_gray"/>
-
-    <LinearLayout
-        android:id="@+id/today_conditions_first_row"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/today_screen_divider"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        android:baselineAligned="true">
-
-        <TextView
-            android:id="@+id/today_humidity_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:drawableTop="@drawable/ic_weather_humidity"
-            android:drawablePadding="8dp"
-            tools:text="57%" />
-
-        <TextView
-            android:id="@+id/today_precipitation_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:drawableTop="@drawable/ic_weather_precipitation"
-            android:drawablePadding="8dp"
-            tools:text="0.0 mm" />
-
-        <TextView
-            android:id="@+id/today_pressure_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:drawableTop="@drawable/ic_weather_pressure"
-            android:drawablePadding="8dp"
-            tools:text="1019 hPa" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/today_conditions_second_row"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/today_conditions_first_row"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:baselineAligned="true">
-
-        <TextView
-            android:id="@+id/today_wind_speed_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="42dp"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:drawableTop="@drawable/ic_weather_wind_speed"
-            android:drawablePadding="8dp"
-            tools:text="20 km/h" />
-
-        <TextView
-            android:id="@+id/today_direction_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:paddingRight="42dp"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:drawableTop="@drawable/ic_weather_direction"
-            android:drawablePadding="8dp"
-            tools:text="SE" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/today_progress_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/bg_white"
-        tools:visibility="gone">
-
-            <ProgressBar
+            <ImageView
+                android:id="@+id/today_weather_icon_overlay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:layout_gravity="center"
-                style="@style/Widget.AppCompat.ProgressBar"/>
+                android:layout_alignLeft="@id/today_weather_icon"
+                android:layout_alignRight="@id/today_weather_icon"
+                android:layout_alignTop="@id/today_weather_icon"
+                android:layout_alignBottom="@id/today_weather_icon"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/overlay_weather_status_today"
+                tools:ignore="ContentDescription" />
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/today_location_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/today_weather_icon"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                tools:text="Prague, Czech Republic"/>
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/today_temperature_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/today_location_label"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:textSize="36sp"
+                android:singleLine="true"
+                tools:text="25C | Sunny"/>
+
+            <View
+                android:id="@+id/today_screen_divider"
+                android:layout_width="120dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/today_temperature_label"
+                android:layout_marginTop="32dp"
+                android:background="@color/bg_light_gray"/>
+
+            <LinearLayout
+                android:id="@+id/today_conditions_first_row"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/today_screen_divider"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                android:baselineAligned="true">
+
+                <TextView
+                    android:id="@+id/today_humidity_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:drawableTop="@drawable/ic_weather_humidity"
+                    android:drawablePadding="8dp"
+                    tools:text="57%" />
+
+                <TextView
+                    android:id="@+id/today_precipitation_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:drawableTop="@drawable/ic_weather_precipitation"
+                    android:drawablePadding="8dp"
+                    tools:text="0.0 mm" />
+
+                <TextView
+                    android:id="@+id/today_pressure_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:drawableTop="@drawable/ic_weather_pressure"
+                    android:drawablePadding="8dp"
+                    tools:text="1019 hPa" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/today_conditions_second_row"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/today_conditions_first_row"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:baselineAligned="true">
+
+                <TextView
+                    android:id="@+id/today_wind_speed_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="42dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:drawableTop="@drawable/ic_weather_wind_speed"
+                    android:drawablePadding="8dp"
+                    tools:text="20 km/h" />
+
+                <TextView
+                    android:id="@+id/today_direction_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:paddingRight="42dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:drawableTop="@drawable/ic_weather_direction"
+                    android:drawablePadding="8dp"
+                    tools:text="SE" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/today_progress_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/bg_white"
+                tools:visibility="gone">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:layout_gravity="center"
+                        style="@style/Widget.AppCompat.ProgressBar"/>
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

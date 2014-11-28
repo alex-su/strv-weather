@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,8 @@ import com.androidquery.AQuery;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class TodayFragment extends AbsLocationFragment implements LoaderManager.LoaderCallbacks<LocalWeather> {
+public class TodayFragment extends AbsLocationFragment implements
+        LoaderManager.LoaderCallbacks<LocalWeather>, SwipeRefreshLayout.OnRefreshListener {
 
     public static TodayFragment newInstance() {
         return new TodayFragment();
@@ -48,14 +50,16 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     TextView mWindDirectionLabel;
     @InjectView(R.id.today_progress_layout)
     FrameLayout mProgressLayout;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private LocalWeather mLocalWeather;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_today, null);
-        ButterKnife.inject(this, contentView);
-        return contentView;
+        mSwipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.fragment_today, null);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        ButterKnife.inject(this, mSwipeRefreshLayout);
+        return mSwipeRefreshLayout;
     }
 
     @Override
@@ -65,14 +69,8 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
 
     @Override
     protected void onLocationReceived(Location location) {
-        if (location == null) {
-            onLocationError();
-            return;
-        }
         showProgress();
-        Bundle params = new Bundle();
-        params.putParcelable(EXTRA_LOCATION, location);
-        getLoaderManager().initLoader(0, params, this).forceLoad();
+        loadWeather(location);
     }
 
     @Override
@@ -83,6 +81,14 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     @Override
     protected void onSettingsChanged() {
         showWeatherData();
+    }
+
+    @Override
+    public void onRefresh() {
+        if (mLocationClient != null && mLocationClient.isConnected()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            loadWeather(mLocationClient.getLastLocation());
+        }
     }
 
     @Override
@@ -99,13 +105,23 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     @Override
     public void onLoadFinished(Loader<LocalWeather> loader, LocalWeather weather) {
         hideProgress();
+        mSwipeRefreshLayout.setRefreshing(false);
         mLocalWeather = weather;
         showWeatherData();
     }
 
     @Override
     public void onLoaderReset(Loader<LocalWeather> loader) {
-        hideProgress();
+    }
+
+    private void loadWeather(Location location) {
+        if (location == null) {
+            onLocationError();
+            return;
+        }
+        Bundle params = new Bundle();
+        params.putParcelable(EXTRA_LOCATION, location);
+        getLoaderManager().restartLoader(0, params, this).forceLoad();
     }
 
     private void showWeatherData() {
