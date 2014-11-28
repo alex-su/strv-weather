@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.util.DateUtil;
 import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
@@ -83,16 +84,11 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
                         weatherCondition.getTemperatureFahrenheit());
             }
             mTemperatureLabel.setText(temperatureString);
-            mDayLabel.setText(formatDate(weatherCondition.getDate()));
+            mDayLabel.setText(DateUtil.getDayOfWeek(weatherCondition.getDate()));
             mConditionsLabel.setText(weatherCondition.getDescription());
             if (weatherCondition.getIconUrl() != null) {
                 mAQuery.id(mWeatherIcon).image(weatherCondition.getIconUrl(), true, true);
             }
-        }
-
-        private String formatDate(Date date) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
-            return dateFormat.format(date);
         }
 
     }

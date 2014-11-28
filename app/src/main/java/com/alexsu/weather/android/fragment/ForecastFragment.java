@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -50,6 +51,15 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
         super.onActivityCreated(savedInstanceState);
         mForecastAdapter = new ForecastAdapter(getActivity(), mForecastList);
         mForecastListView.setAdapter(mForecastAdapter);
+        mForecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                WeatherCondition weatherCondition = mForecastList.get(position);
+                ShareDialogFragment shareDialogFragment =
+                        ShareDialogFragment.newInstance(weatherCondition);
+                shareDialogFragment.show(getFragmentManager(), "Share");
+            }
+        });
     }
 
     @Override

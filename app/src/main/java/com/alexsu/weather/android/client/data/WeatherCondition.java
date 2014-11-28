@@ -1,8 +1,9 @@
 package com.alexsu.weather.android.client.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WeatherCondition {
+public class WeatherCondition implements Serializable {
 
     private int mHumidity;
     private double mPrecipitation;
