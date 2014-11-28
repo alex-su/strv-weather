@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.client.data.WeatherCondition;
@@ -20,7 +19,6 @@ public class ShareUtil {
     }
 
     public static void shareViaEmail(Context context, WeatherCondition weatherCondition) {
-        Log.d("shareViaEmail", "shareViaEmail");
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_email_subject));
         intent.putExtra(Intent.EXTRA_TEXT, getText(context, weatherCondition));

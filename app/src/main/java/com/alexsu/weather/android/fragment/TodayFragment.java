@@ -50,16 +50,17 @@ public class TodayFragment extends AbsLocationFragment implements
     TextView mWindDirectionLabel;
     @InjectView(R.id.today_progress_layout)
     FrameLayout mProgressLayout;
+    @InjectView(R.id.today_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private LocalWeather mLocalWeather;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) inflater.inflate(R.layout.fragment_today, null);
+        View contentView = inflater.inflate(R.layout.fragment_today, null);
+        ButterKnife.inject(this, contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        ButterKnife.inject(this, mSwipeRefreshLayout);
-        return mSwipeRefreshLayout;
+        return contentView;
     }
 
     @Override
