@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.client.command.GetTodayWeatherCommand;
 import com.alexsu.weather.android.client.data.LocalWeather;
+import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.client.data.WeatherLocation;
+import com.androidquery.AQuery;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -58,6 +62,7 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
 
     @Override
     protected void onLocationReceived(Location location) {
+        showProgress();
         Bundle params = new Bundle();
         params.putParcelable(EXTRA_LOCATION, location);
         getLoaderManager().initLoader(0, params, this).forceLoad();
@@ -83,29 +88,50 @@ public class TodayFragment extends AbsLocationFragment implements LoaderManager.
     public void onLoadFinished(Loader<LocalWeather> loader, LocalWeather weather) {
         hideProgress();
         if (weather.getWeatherLocation() != null) {
-            mLocationLabel.setText(getString(R.string.format_location,
-                    weather.getWeatherLocation().getAreaName(),
-                    weather.getWeatherLocation().getCountryName()));
+            showWeatherLocation(weather.getWeatherLocation());
         }
         if (weather.getWeatherCondition() != null) {
-            mTemperatureLabel.setText(getString(R.string.format_temperature_celsius,
-                    weather.getWeatherCondition().getTemperatureCelsius(),
-                    weather.getWeatherCondition().getDescription()));
-            mHumidityLabel.setText(getString(R.string.format_humidity,
-                    weather.getWeatherCondition().getHumidity()));
-            mPrecipitationLabel.setText(getString(R.string.format_precipitation,
-                    weather.getWeatherCondition().getPrecipitation()));
-            mPressureLabel.setText(getString(R.string.format_pressure,
-                    weather.getWeatherCondition().getPressure()));
-            mWindSpeedLabel.setText(getString(R.string.format_speed_kmph,
-                    weather.getWeatherCondition().getWindSpeedKmph()));
-            mWindDirectionLabel.setText(weather.getWeatherCondition().getWindDirection());
+            showWeatherCondition(weather.getWeatherCondition());
         }
     }
 
     @Override
     public void onLoaderReset(Loader<LocalWeather> loader) {
         hideProgress();
+    }
+
+    private void showWeatherLocation(WeatherLocation weatherLocation) {
+        mLocationLabel.setText(getString(R.string.format_location,
+                weatherLocation.getAreaName(),
+                weatherLocation.getCountryName()));
+    }
+
+    private void showWeatherCondition(WeatherCondition weatherCondition) {
+        mTemperatureLabel.setText(getString(R.string.format_temperature_celsius,
+                weatherCondition.getTemperatureCelsius(),
+                weatherCondition.getDescription()));
+        mHumidityLabel.setText(getString(R.string.format_humidity,
+                weatherCondition.getHumidity()));
+        mPrecipitationLabel.setText(getString(R.string.format_precipitation,
+                weatherCondition.getPrecipitation()));
+        mPressureLabel.setText(getString(R.string.format_pressure,
+                weatherCondition.getPressure()));
+        mWindSpeedLabel.setText(getString(R.string.format_speed_kmph,
+                weatherCondition.getWindSpeedKmph()));
+        mWindDirectionLabel.setText(weatherCondition.getWindDirection());
+
+        if (!TextUtils.isEmpty(weatherCondition.getIconUrl())) {
+            loadWeatherIcon(weatherCondition.getIconUrl());
+        }
+    }
+
+    private void loadWeatherIcon(String url) {
+        AQuery aq = new AQuery(getActivity());
+        aq.id(mWeatherIcon).image(url, true, true);
+    }
+
+    private void showProgress() {
+        mProgressLayout.setVisibility(View.VISIBLE);
     }
 
     private void hideProgress() {

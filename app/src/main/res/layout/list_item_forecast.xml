@@ -11,10 +11,24 @@
 
     <ImageView
         android:id="@+id/forecast_weather_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="16dp"
+        android:padding="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/overlay_weather_status_forecast"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/forecast_weather_icon_overlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
+        android:layout_alignLeft="@id/forecast_weather_icon"
+        android:layout_alignRight="@id/forecast_weather_icon"
+        android:layout_alignTop="@id/forecast_weather_icon"
+        android:layout_alignBottom="@id/forecast_weather_icon"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         android:src="@drawable/overlay_weather_status_forecast"
         tools:ignore="ContentDescription" />
 

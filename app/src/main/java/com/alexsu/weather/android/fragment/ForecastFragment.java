@@ -58,6 +58,7 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
 
     @Override
     protected void onLocationReceived(Location location) {
+        showProgress();
         Bundle params = new Bundle();
         params.putParcelable(EXTRA_LOCATION, location);
         getLoaderManager().initLoader(0, params, this).forceLoad();
@@ -83,6 +84,7 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     public void onLoadFinished(Loader<ArrayList<WeatherCondition>> loader,
                                ArrayList<WeatherCondition> forecastList) {
         hideProgress();
+        mForecastList.clear();
         mForecastList.addAll(forecastList);
         mForecastAdapter.notifyDataSetChanged();
     }
@@ -90,6 +92,10 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     @Override
     public void onLoaderReset(Loader<ArrayList<WeatherCondition>> loader) {
         hideProgress();
+    }
+
+    private void showProgress() {
+        mProgressLayout.setVisibility(View.VISIBLE);
     }
 
     private void hideProgress() {

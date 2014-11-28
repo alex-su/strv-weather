@@ -6,14 +6,14 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpClient extends OkHttpClient {
 
-    private static HttpClient mInstance;
+    private static HttpClient sInstance;
 
     public static HttpClient getInstance() {
-        if (mInstance == null) {
-            mInstance = new HttpClient();
-            mInstance.setConnectTimeout(10, TimeUnit.SECONDS);
+        if (sInstance == null) {
+            sInstance = new HttpClient();
+            sInstance.setConnectTimeout(10, TimeUnit.SECONDS);
         }
-        return mInstance;
+        return sInstance;
     }
 
 }
