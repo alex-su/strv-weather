@@ -19,6 +19,7 @@ import com.alexsu.weather.android.client.command.GetTodayWeatherCommand;
 import com.alexsu.weather.android.data.LocalWeather;
 import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.data.WeatherLocation;
+import com.alexsu.weather.android.util.FontUtil;
 import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
@@ -61,6 +62,12 @@ public class TodayFragment extends AbsLocationFragment implements
         ButterKnife.inject(this, contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         return contentView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setFonts();
     }
 
     @Override
@@ -192,6 +199,16 @@ public class TodayFragment extends AbsLocationFragment implements
 
     private void hideProgress() {
         mProgressLayout.setVisibility(View.GONE);
+    }
+
+    private void setFonts() {
+        mLocationLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_LIGHT));
+        mTemperatureLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+        mHumidityLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+        mPrecipitationLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+        mPressureLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+        mWindSpeedLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+        mWindDirectionLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
     }
 
 }

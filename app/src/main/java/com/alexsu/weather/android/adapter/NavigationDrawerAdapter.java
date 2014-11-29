@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.data.NavigationItem;
+import com.alexsu.weather.android.util.FontUtil;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,7 @@ public class NavigationDrawerAdapter extends ArrayAdapter<NavigationItem> {
 
         public ViewHolder(View convertView) {
             ButterKnife.inject(this, convertView);
+            mNavigationLabel.setTypeface(FontUtil.get(getContext(), FontUtil.ROBOTO_REGULAR));
         }
 
         public void populate(NavigationItem navigationItem) {

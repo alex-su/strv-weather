@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
 import android.view.Menu;
 
 import com.alexsu.weather.android.R;
@@ -11,6 +12,7 @@ import com.alexsu.weather.android.fragment.AbsLocationFragment;
 import com.alexsu.weather.android.fragment.ForecastFragment;
 import com.alexsu.weather.android.fragment.NavigationDrawerFragment;
 import com.alexsu.weather.android.fragment.TodayFragment;
+import com.alexsu.weather.android.util.FontUtil;
 
 
 public class MainActivity extends ActionBarActivity
@@ -44,7 +46,7 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, fragment)
                 .commit();
 
-        getSupportActionBar().setTitle(fragment.getTitleRes());
+        updateActionBarTitle(fragment);
     }
 
     private AbsLocationFragment getFragmentForPosition(int position) {
@@ -55,6 +57,12 @@ public class MainActivity extends ActionBarActivity
                 return TodayFragment.newInstance();
 
         }
+    }
+
+    private void updateActionBarTitle(AbsLocationFragment fragment) {
+        Spannable actionBarTitle = FontUtil.applyTypefaceSpan(this,
+                fragment.getTitleRes(), FontUtil.ROBOTO_REGULAR);
+        getSupportActionBar().setTitle(actionBarTitle);
     }
 
     @Override

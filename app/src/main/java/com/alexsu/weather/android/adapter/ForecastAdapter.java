@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.util.DateUtil;
+import com.alexsu.weather.android.util.FontUtil;
 import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
@@ -68,6 +69,7 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
 
         public ViewHolder(View convertView) {
             ButterKnife.inject(this, convertView);
+            setFonts();
         }
 
         public void populate(WeatherCondition weatherCondition) {
@@ -87,6 +89,12 @@ public class ForecastAdapter extends ArrayAdapter<WeatherCondition> {
             if (weatherCondition.getIconUrl() != null) {
                 mAQuery.id(mWeatherIcon).image(weatherCondition.getIconUrl(), true, true);
             }
+        }
+
+        private void setFonts() {
+            mDayLabel.setTypeface(FontUtil.get(getContext(), FontUtil.ROBOTO_LIGHT));
+            mTemperatureLabel.setTypeface(FontUtil.get(getContext(), FontUtil.ROBOTO_MEDIUM));
+            mConditionsLabel.setTypeface(FontUtil.get(getContext(), FontUtil.ROBOTO_LIGHT));
         }
 
     }
