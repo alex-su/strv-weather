@@ -7,7 +7,7 @@ import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 
 public class ShareUtil {
 

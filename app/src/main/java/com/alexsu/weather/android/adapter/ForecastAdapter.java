@@ -10,14 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.util.DateUtil;
 import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

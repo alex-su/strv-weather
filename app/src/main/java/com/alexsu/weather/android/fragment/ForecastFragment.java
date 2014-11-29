@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,7 @@ import android.widget.ListView;
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.adapter.ForecastAdapter;
 import com.alexsu.weather.android.client.command.GetForecastCommand;
-import com.alexsu.weather.android.client.data.LocalWeather;
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.util.Settings;
 
 import java.util.ArrayList;

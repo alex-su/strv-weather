@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.util.Constants;
 import com.alexsu.weather.android.util.ShareUtil;
 

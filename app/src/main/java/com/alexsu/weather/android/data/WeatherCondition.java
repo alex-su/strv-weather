@@ -1,4 +1,4 @@
-package com.alexsu.weather.android.client.data;
+package com.alexsu.weather.android.data;
 
 import java.io.Serializable;
 import java.util.Date;

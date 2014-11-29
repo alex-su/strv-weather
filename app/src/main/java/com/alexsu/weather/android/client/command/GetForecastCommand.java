@@ -2,9 +2,8 @@ package com.alexsu.weather.android.client.command;
 
 import android.location.Location;
 
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.client.parser.GetForecastParser;
-import com.alexsu.weather.android.client.parser.GetTodayWeatherParser;
 import com.alexsu.weather.android.client.request.RequestFactory;
 
 import java.util.ArrayList;

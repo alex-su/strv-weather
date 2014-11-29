@@ -1,6 +1,6 @@
 package com.alexsu.weather.android.client.parser;
 
-import com.alexsu.weather.android.client.data.WeatherCondition;
+import com.alexsu.weather.android.data.WeatherCondition;
 import com.squareup.okhttp.ResponseBody;
 
 import org.json.JSONArray;

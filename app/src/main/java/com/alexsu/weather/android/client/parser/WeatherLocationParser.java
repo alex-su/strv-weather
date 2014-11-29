@@ -1,6 +1,6 @@
 package com.alexsu.weather.android.client.parser;
 
-import com.alexsu.weather.android.client.data.WeatherLocation;
+import com.alexsu.weather.android.data.WeatherLocation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
