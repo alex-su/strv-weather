@@ -3,30 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="24dp"
+    android:paddingTop="22dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingBottom="24dp"
+    android:paddingBottom="22dp"
     android:background="@drawable/list_item_bg">
 
     <ImageView
         android:id="@+id/forecast_weather_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginRight="16dp"
-        android:padding="16dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="20dp"
+        android:padding="11dp"
         android:scaleType="fitXY"
         android:src="@drawable/overlay_weather_status_forecast"
+        android:layout_centerVertical="true"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/forecast_weather_icon_overlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/forecast_weather_icon"
-        android:layout_alignRight="@id/forecast_weather_icon"
-        android:layout_alignTop="@id/forecast_weather_icon"
-        android:layout_alignBottom="@id/forecast_weather_icon"
+        android:layout_centerVertical="true"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/overlay_weather_status_forecast"
@@ -47,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/forecast_day_label"
         android:layout_toRightOf="@id/forecast_weather_icon"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:textSize="@dimen/text_size_forecast_temperature"
         tools:text="22 C" />
 
@@ -58,7 +57,7 @@
         android:layout_below="@id/forecast_day_label"
         android:layout_toRightOf="@id/forecast_temperature_label"
         android:layout_alignBaseline="@id/forecast_temperature_label"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="36dp"
         android:textSize="@dimen/text_size_forecast_condition"
         tools:text="Sunny intervals" />
 
