@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.adapter.ForecastAdapter;
@@ -40,6 +41,8 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     RelativeLayout mNoInternetLayout;
     @InjectView(R.id.no_internet_settings_button)
     Button mInternetSettingsButton;
+    @InjectView(R.id.forecast_empty_view)
+    TextView mEmptyView;
 
     private ArrayList<WeatherCondition> mForecastList = new ArrayList<WeatherCondition>();
     private ForecastAdapter mForecastAdapter;
@@ -72,6 +75,7 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
                 shareDialogFragment.show(getFragmentManager(), "Share");
             }
         });
+        mForecastListView.setEmptyView(mEmptyView);
         checkInternetConnection();
     }
 

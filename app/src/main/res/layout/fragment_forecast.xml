@@ -10,6 +10,15 @@
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"/>
 
+    <TextView
+        android:id="@+id/forecast_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/text_size_navigation_item"
+        android:textColor="@color/bg_light_gray"
+        android:text="Nothing was loaded"/>
+
     <FrameLayout
         android:id="@+id/forecats_progress_layout"
         android:layout_width="fill_parent"
