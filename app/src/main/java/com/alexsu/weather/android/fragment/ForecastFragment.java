@@ -8,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.adapter.ForecastAdapter;
 import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.loader.ForecastLoader;
+import com.alexsu.weather.android.util.InternetConnectionUtil;
 import com.alexsu.weather.android.util.Settings;
+import com.alexsu.weather.android.util.ShareUtil;
 
 import java.util.ArrayList;
 
@@ -32,6 +36,10 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     ListView mForecastListView;
     @InjectView(R.id.forecats_progress_layout)
     FrameLayout mProgressLayout;
+    @InjectView(R.id.no_internet_view)
+    RelativeLayout mNoInternetLayout;
+    @InjectView(R.id.no_internet_settings_button)
+    Button mInternetSettingsButton;
 
     private ArrayList<WeatherCondition> mForecastList = new ArrayList<WeatherCondition>();
     private ForecastAdapter mForecastAdapter;
@@ -40,6 +48,12 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_forecast, null);
         ButterKnife.inject(this, contentView);
+        mInternetSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareUtil.openInternetSettings(getActivity());
+            }
+        });
         return contentView;
     }
 
@@ -57,6 +71,15 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
                 shareDialogFragment.show(getFragmentManager(), "Share");
             }
         });
+        checkInternetConnection();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mNoInternetLayout.getVisibility() == View.VISIBLE) {
+            checkInternetConnection();
+        }
     }
 
     @Override
@@ -96,9 +119,11 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
     public void onLoadFinished(Loader<ArrayList<WeatherCondition>> loader,
                                ArrayList<WeatherCondition> forecastList) {
         hideProgress();
-        mForecastList.clear();
-        mForecastList.addAll(forecastList);
-        mForecastAdapter.notifyDataSetChanged();
+        if (forecastList != null) {
+            mForecastList.clear();
+            mForecastList.addAll(forecastList);
+            mForecastAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -112,6 +137,22 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
 
     private void hideProgress() {
         mProgressLayout.setVisibility(View.GONE);
+    }
+
+    private void showNoInternetView() {
+        mNoInternetLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNoInternetView() {
+        mNoInternetLayout.setVisibility(View.GONE);
+    }
+
+    private void checkInternetConnection() {
+        if (!InternetConnectionUtil.isConnected(getActivity())) {
+            showNoInternetView();
+        } else {
+            hideNoInternetView();
+        }
     }
 
 }

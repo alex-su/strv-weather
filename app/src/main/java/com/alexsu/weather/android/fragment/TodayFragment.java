@@ -9,8 +9,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
@@ -19,7 +21,9 @@ import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.data.WeatherLocation;
 import com.alexsu.weather.android.loader.TodayWeatherLoader;
 import com.alexsu.weather.android.util.FontUtil;
+import com.alexsu.weather.android.util.InternetConnectionUtil;
 import com.alexsu.weather.android.util.Settings;
+import com.alexsu.weather.android.util.ShareUtil;
 import com.androidquery.AQuery;
 
 import butterknife.ButterKnife;
@@ -52,6 +56,10 @@ public class TodayFragment extends AbsLocationFragment implements
     FrameLayout mProgressLayout;
     @InjectView(R.id.today_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+    @InjectView(R.id.no_internet_view)
+    RelativeLayout mNoInternetLayout;
+    @InjectView(R.id.no_internet_settings_button)
+    Button mInternetSettingsButton;
 
     private LocalWeather mLocalWeather;
 
@@ -60,6 +68,12 @@ public class TodayFragment extends AbsLocationFragment implements
         View contentView = inflater.inflate(R.layout.fragment_today, null);
         ButterKnife.inject(this, contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        mInternetSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareUtil.openInternetSettings(getActivity());
+            }
+        });
         return contentView;
     }
 
@@ -67,6 +81,15 @@ public class TodayFragment extends AbsLocationFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setFonts();
+        checkInternetConnection();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mNoInternetLayout.getVisibility() == View.VISIBLE) {
+            checkInternetConnection();
+        }
     }
 
     @Override
@@ -195,6 +218,14 @@ public class TodayFragment extends AbsLocationFragment implements
         mProgressLayout.setVisibility(View.GONE);
     }
 
+    private void showNoInternetView() {
+        mNoInternetLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNoInternetView() {
+        mNoInternetLayout.setVisibility(View.GONE);
+    }
+
     private void setFonts() {
         mLocationLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_LIGHT));
         mTemperatureLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
@@ -203,6 +234,14 @@ public class TodayFragment extends AbsLocationFragment implements
         mPressureLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
         mWindSpeedLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
         mWindDirectionLabel.setTypeface(FontUtil.get(getActivity(), FontUtil.ROBOTO_MEDIUM));
+    }
+
+    private void checkInternetConnection() {
+        if (!InternetConnectionUtil.isConnected(getActivity())) {
+            showNoInternetView();
+        } else {
+            hideNoInternetView();
+        }
     }
 
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/no_internet_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/no_internet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/text_size_navigation_item"
+        android:textColor="@color/bg_light_gray"
+        android:text="@string/no_internet_title"/>
+
+    <Button
+        android:id="@+id/no_internet_settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/no_internet_title"
+        android:layout_marginTop="16dp"
+        android:textSize="16dp"
+        android:textColor="@color/text_dark_grey"
+        android:text="@string/no_internet_open_settings"/>
+
+</RelativeLayout>

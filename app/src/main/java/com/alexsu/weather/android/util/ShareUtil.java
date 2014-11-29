@@ -37,6 +37,11 @@ public class ShareUtil {
         fromFragment.startActivityForResult(contactPickerIntent, Constants.REQUEST_CODE_PICK_CONTACT);
     }
 
+    public static void openInternetSettings(Context context) {
+        Intent intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+        context.startActivity(intent);
+    }
+
     private static String getText(Context context, WeatherCondition weatherCondition) {
         return context.getString(R.string.share_content_text,
                 DateUtil.getDayOfWeek(weatherCondition.getDate()),

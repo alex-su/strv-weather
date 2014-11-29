@@ -188,4 +188,6 @@
 
     </FrameLayout>
 
+    <include layout="@layout/view_no_internet" />
+
 </FrameLayout>

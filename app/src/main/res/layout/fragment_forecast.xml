@@ -26,4 +26,6 @@
 
     </FrameLayout>
 
+    <include layout="@layout/view_no_internet" />
+
 </RelativeLayout>
