@@ -3,7 +3,6 @@ package com.alexsu.weather.android.fragment;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -15,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.client.command.GetTodayWeatherCommand;
 import com.alexsu.weather.android.data.LocalWeather;
 import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.data.WeatherLocation;
+import com.alexsu.weather.android.loader.TodayWeatherLoader;
 import com.alexsu.weather.android.util.FontUtil;
 import com.alexsu.weather.android.util.Settings;
 import com.androidquery.AQuery;
@@ -101,13 +100,8 @@ public class TodayFragment extends AbsLocationFragment implements
 
     @Override
     public Loader<LocalWeather> onCreateLoader(int id, Bundle args) {
-        final Location location = args.getParcelable(EXTRA_LOCATION);
-        return new AsyncTaskLoader<LocalWeather>(getActivity()) {
-            @Override
-            public LocalWeather loadInBackground() {
-                return new GetTodayWeatherCommand(location).execute();
-            }
-        };
+        Location location = args.getParcelable(EXTRA_LOCATION);
+        return new TodayWeatherLoader(getActivity(), location);
     }
 
     @Override

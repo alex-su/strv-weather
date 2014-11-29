@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 
 import com.alexsu.weather.android.R;
-import com.alexsu.weather.android.fragment.AbsLocationFragment;
 import com.alexsu.weather.android.fragment.SettingsFragment;
 import com.alexsu.weather.android.util.Constants;
 import com.alexsu.weather.android.util.FontUtil;

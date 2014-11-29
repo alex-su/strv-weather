@@ -3,7 +3,6 @@ package com.alexsu.weather.android.fragment;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,8 @@ import android.widget.ListView;
 
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.adapter.ForecastAdapter;
-import com.alexsu.weather.android.client.command.GetForecastCommand;
 import com.alexsu.weather.android.data.WeatherCondition;
+import com.alexsu.weather.android.loader.ForecastLoader;
 import com.alexsu.weather.android.util.Settings;
 
 import java.util.ArrayList;
@@ -89,13 +88,8 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
 
     @Override
     public Loader<ArrayList<WeatherCondition>> onCreateLoader(int id, Bundle args) {
-        final Location location = args.getParcelable(EXTRA_LOCATION);
-        return new AsyncTaskLoader<ArrayList<WeatherCondition>>(getActivity()) {
-            @Override
-            public ArrayList<WeatherCondition> loadInBackground() {
-                return new GetForecastCommand(location).execute();
-            }
-        };
+        Location location = args.getParcelable(EXTRA_LOCATION);
+        return new ForecastLoader(getActivity(), location);
     }
 
     @Override
