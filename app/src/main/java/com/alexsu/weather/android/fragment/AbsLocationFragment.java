@@ -108,14 +108,18 @@ public abstract class AbsLocationFragment extends Fragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_SETTINGS) {
+            // Updating temperature/length settings
             onSettingsChanged();
         }
     }
 
     private void startSettingsActivity() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            // Since PreferenceFragment is available only from API 11,
+            // we use PreferenceActivity on lower versions of the system
             SettingsActivity.startActivityForResult(getActivity(), this);
         } else {
+            // Start normal activity with PreferenceFragment
             SettingsActivityHC.startActivityForResult(getActivity(), this);
         }
     }

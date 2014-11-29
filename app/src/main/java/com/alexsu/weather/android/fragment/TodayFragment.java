@@ -87,6 +87,7 @@ public class TodayFragment extends AbsLocationFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        // Hide mNoInternetLayout if connected
         if (mNoInternetLayout.getVisibility() == View.VISIBLE) {
             checkInternetConnection();
         }
@@ -207,6 +208,7 @@ public class TodayFragment extends AbsLocationFragment implements
 
     private void loadWeatherIcon(String url) {
         AQuery aq = new AQuery(getActivity());
+        // Async loading with file and memory cache
         aq.id(mWeatherIcon).image(url, true, true);
     }
 

@@ -65,6 +65,7 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
         mForecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Displaying a dialog with sharing options
                 WeatherCondition weatherCondition = mForecastList.get(position);
                 ShareDialogFragment shareDialogFragment =
                         ShareDialogFragment.newInstance(weatherCondition);

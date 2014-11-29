@@ -38,6 +38,18 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            // Only show items in the action bar relevant to this screen
+            // if the drawer is not showing. Otherwise, let the drawer
+            // decide what to show in the action bar.
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         AbsLocationFragment fragment = getFragmentForPosition(position);
@@ -60,21 +72,10 @@ public class MainActivity extends ActionBarActivity
     }
 
     private void updateActionBarTitle(AbsLocationFragment fragment) {
+        // Applying custom typeface to the ActionBar title
         Spannable actionBarTitle = FontUtil.applyTypefaceSpan(this,
                 fragment.getTitleRes(), FontUtil.ROBOTO_REGULAR);
         getSupportActionBar().setTitle(actionBarTitle);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
     }
 
 }

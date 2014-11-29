@@ -23,6 +23,7 @@ public class OnSettingsChangeListener implements SharedPreferences.OnSharedPrefe
         if (mContext != null) {
             String lengthKey = mContext.getString(R.string.pref_key_length);
             String temperatureKey = mContext.getString(R.string.pref_key_temperature);
+            // Updating summary
             if (key.equals(lengthKey)) {
                 Preference lengthPref = mLengthPref;
                 if (Settings.isUsingMeters(mContext)) {

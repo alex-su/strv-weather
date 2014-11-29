@@ -91,6 +91,7 @@ public class ShareDialogFragment extends DialogFragment {
                         dismiss();
                         break;
                     case POSITION_SMS:
+                        // Can't send SMS without a recipient :(
                         ShareUtil.pickContact(ShareDialogFragment.this);
                         break;
                 }
