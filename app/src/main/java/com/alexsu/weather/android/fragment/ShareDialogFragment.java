@@ -16,7 +16,7 @@ import android.widget.ListView;
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.util.Constants;
-import com.alexsu.weather.android.util.ShareUtil;
+import com.alexsu.weather.android.util.IntentUtil;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public class ShareDialogFragment extends DialogFragment {
                     null);
             int phoneColumnsIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
             if (cursor.moveToFirst()) {
-                ShareUtil.shareViaSms(getActivity(), mWeatherCondition, cursor.getString(phoneColumnsIndex));
+                IntentUtil.shareViaSms(getActivity(), mWeatherCondition, cursor.getString(phoneColumnsIndex));
             }
         }
         dismiss();
@@ -83,16 +83,16 @@ public class ShareDialogFragment extends DialogFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long ld) {
                 switch (position) {
                     case POSITION_SIMPLE:
-                        ShareUtil.share(getActivity(), mWeatherCondition);
+                        IntentUtil.share(getActivity(), mWeatherCondition);
                         dismiss();
                         break;
                     case POSITION_EMAIL:
-                        ShareUtil.shareViaEmail(getActivity(), mWeatherCondition);
+                        IntentUtil.shareViaEmail(getActivity(), mWeatherCondition);
                         dismiss();
                         break;
                     case POSITION_SMS:
                         // Can't send SMS without a recipient :(
-                        ShareUtil.pickContact(ShareDialogFragment.this);
+                        IntentUtil.pickContact(ShareDialogFragment.this);
                         break;
                 }
             }

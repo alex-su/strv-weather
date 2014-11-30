@@ -17,10 +17,10 @@
         android:layout_centerInParent="true"
         android:textSize="@dimen/text_size_navigation_item"
         android:textColor="@color/bg_light_gray"
-        android:text="Nothing was loaded"/>
+        android:text="@string/forecast_empty_text"/>
 
     <FrameLayout
-        android:id="@+id/forecats_progress_layout"
+        android:id="@+id/forecast_progress_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/bg_white"

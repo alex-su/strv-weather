@@ -59,6 +59,7 @@
         android:layout_alignBaseline="@id/forecast_temperature_label"
         android:layout_marginLeft="36dp"
         android:textSize="@dimen/text_size_forecast_condition"
+        android:textColor="@color/text_dark_grey_2"
         tools:text="Sunny intervals" />
 
 </RelativeLayout>

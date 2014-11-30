@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 import com.alexsu.weather.android.R;
 import com.alexsu.weather.android.data.WeatherCondition;
 
-public class ShareUtil {
+public class IntentUtil {
 
     public static void share(Context context, WeatherCondition weatherCondition) {
         Intent intent = new Intent(Intent.ACTION_SEND);

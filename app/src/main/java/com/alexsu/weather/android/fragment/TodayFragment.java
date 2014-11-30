@@ -23,7 +23,7 @@ import com.alexsu.weather.android.loader.TodayWeatherLoader;
 import com.alexsu.weather.android.util.FontUtil;
 import com.alexsu.weather.android.util.InternetConnectionUtil;
 import com.alexsu.weather.android.util.Settings;
-import com.alexsu.weather.android.util.ShareUtil;
+import com.alexsu.weather.android.util.IntentUtil;
 import com.androidquery.AQuery;
 
 import butterknife.ButterKnife;
@@ -65,13 +65,13 @@ public class TodayFragment extends AbsLocationFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_today, null);
+        View contentView = inflater.inflate(R.layout.fragment_today, container, false);
         ButterKnife.inject(this, contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mInternetSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShareUtil.openInternetSettings(getActivity());
+                IntentUtil.openInternetSettings(getActivity());
             }
         });
         return contentView;

@@ -20,7 +20,7 @@ import com.alexsu.weather.android.data.WeatherCondition;
 import com.alexsu.weather.android.loader.ForecastLoader;
 import com.alexsu.weather.android.util.InternetConnectionUtil;
 import com.alexsu.weather.android.util.Settings;
-import com.alexsu.weather.android.util.ShareUtil;
+import com.alexsu.weather.android.util.IntentUtil;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
 
     @InjectView(R.id.forecast_list)
     ListView mForecastListView;
-    @InjectView(R.id.forecats_progress_layout)
+    @InjectView(R.id.forecast_progress_layout)
     FrameLayout mProgressLayout;
     @InjectView(R.id.no_internet_view)
     RelativeLayout mNoInternetLayout;
@@ -49,12 +49,12 @@ public class ForecastFragment extends AbsLocationFragment implements LoaderManag
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_forecast, null);
+        View contentView = inflater.inflate(R.layout.fragment_forecast, container, false);
         ButterKnife.inject(this, contentView);
         mInternetSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShareUtil.openInternetSettings(getActivity());
+                IntentUtil.openInternetSettings(getActivity());
             }
         });
         return contentView;
